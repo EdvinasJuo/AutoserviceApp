@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Customer: {{ customer.owner_name }}</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Engine</th>
+        <th>License Plate</th>
+        <th>VIN Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ customer.car_model.make }}</td>
+        <td>{{ customer.car_model.model }}</td>
+        <td>{{ customer.car_model.year }}</td>
+        <td>{{ customer.car_model.engine }}</td>
+        <td>{{ customer.license_plate }}</td>
+        <td>{{ customer.vin_number }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Order History</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Order Date</th>
+        <th>Quantity</th>
+        <th>Total Cost</th>
+        <th>Repair Status</th>
+        <th>Services</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order_line in order_history %}
+      <tr>
+        <td><a href="{% url 'order_line' order_line.id %}">{{ order_line.id }}</a></td>
+        <td>{{ order_line.order_date }}</td>
+        <td>{{ order_line.quantity }}</td>
+        <td>{{ order_line.total_cost }}</td>
+        <td>{{ order_line.repair_status }}</td>
+        <td>
+          {% for service in order_line.services.all %}
+            {{ service.name }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

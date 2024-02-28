@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% load custom_pagination %}
+
+{% block content %}
+<h1>Order Lines</h1>
+<p>Autoservice cars</p>
+
+<!-- Paieskos forma -->
+<form method="get" class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search Orders" aria-label="Search"
+           name="q"
+           value="{{ request.GET.q }}">
+    <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+</form>
+<a href="{% url 'order_line-new' %}?next=/library" class="btn btn-success mt-3">New</a>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Order Date</th>
+        <th>Car</th>
+        <th>Total Cost</th>
+        <th>Repair Status</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for order in order_lines %}
+    <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.order_date }}</td>
+        <td>{{ order.car }}</td>
+        <td>{{ order.total_cost }}</td>
+
+        <td style="color:
+            {% if order.repair_status == 'Pending' %}
+              orange
+            {% elif order.repair_status == 'In Progress' %}
+              blue
+            {% elif order.repair_status == 'Completed' %}
+              green
+            {% endif %};">
+            {{ order.repair_status }}
+        </td>
+        <td>
+            <a href="{% url 'order_line' order.id %}" class="btn btn-primary">View Details</a>
+            <a href="{% url 'order_line-update' order_line_id=order.id %}" class="btn btn-warning">Update</a>
+            <a href="{% url 'order_line-delete' order_line_id=order.id %}" class="btn btn-danger">Delete</a>
+
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<!-- pagination šablonas su custom tag'u -->
+{% show_pagination_links order_lines %}
+{% endblock %}

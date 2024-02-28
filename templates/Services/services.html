@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load custom_pagination %}
+
+{% block content %}
+<h1>Services</h1>
+<p>Autoservice cars</p>
+<!-- Paieskos forma -->
+<form method="get" class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search Services" aria-label="Search"
+           name="q"
+           value="{{ request.GET.q }}">
+    <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+</form>
+
+{% if user.is_superuser %}
+<a href="{% url 'service-new' %}?next=/library" class="btn btn-success mt-3">New</a>
+{% endif %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        {% if user.is_superuser %}
+        <th>Actions</th>
+        {% endif %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for service in services %}
+    <tr>
+        <td>{{ service.name }}</td>
+        <td>{{ service.description }}</td>
+        <td>{{ service.price }}€</td>
+        {% if user.is_superuser %}
+        <td>
+            <a href="{% url 'service-update' service_id=service.id %}" class="btn btn-warning">Update</a>
+            <a href="{% url 'service-delete' service_id=service.id %}" class="btn btn-danger">Delete</a>
+        </td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<!-- pagination šablonas su custom tag'u -->
+{% show_pagination_links services %}
+{% endblock %}

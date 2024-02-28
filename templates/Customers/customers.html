@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load custom_pagination %}
+
+{% block content %}
+<h1>Cars</h1>
+<p>Autoservice cars</p>
+<!-- Paieskos forma -->
+<form method="get" class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search Customers" aria-label="Search"
+           name="q"
+           value="{{ request.GET.q }}">
+    <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+</form>
+
+<a href="{% url 'customer-new' %}?next=/library" class="btn btn-success mt-3">New</a>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Owner Name</th>
+        <th>License Plate</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for c in customers %}
+    <tr>
+        <td>{{ c.car_model.make }}</td>
+        <td>{{ c.car_model.model }}</td>
+        <td>{{ c.owner_name }}</td>
+        <td>{{ c.license_plate }}</td>
+        <td>
+            <a href="{% url 'customer' c.id %}" class="btn btn-primary">View Details</a>
+            <a href="{% url 'customer-update' customer_id=c.id %}" class="btn btn-warning">Update</a>
+            <a href="{% url 'customer-delete' customer_id=c.id %}" class="btn btn-danger">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<!-- pagination šablonas su custom tag'u -->
+{% show_pagination_links customers %}
+{% endblock %}

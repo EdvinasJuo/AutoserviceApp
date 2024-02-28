@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">Order ID: {{ order_line.id }}</h1>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="card-subtitle mb-3 text-muted">Order Details</h5>
+                    <p><strong>Order Date:</strong> {{ order_line.order_date }}</p>
+                    <p><strong>Car:</strong> {{ order_line.car }}</p>
+                    <p><strong>Quantity:</strong> {{ order_line.quantity }}</p>
+                    {% if order_line.services.all %}
+                    <h6 class="card-subtitle mb-3 text-muted">Services</h6>
+                    {% for service in order_line.services.all %}
+                    <p><strong>{{ forloop.counter }}. {{ service.name }} Price:</strong> {{ service.price }}</p>
+                    {% endfor %}
+                    <p><strong>Total Cost:</strong> {{ total_cost }}</p>
+                    {% endif %}
+                    <p><strong>Repair Status:</strong> <span style="color:
+              {% if order_line.repair_status == 'Pending' %}
+                orange
+              {% elif order_line.repair_status == 'In Progress' %}
+                blue
+              {% elif order_line.repair_status == 'Completed' %}
+                green
+              {% endif %};">{{ order_line.repair_status }}</span></p>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="card-subtitle mb-3 text-muted">Car Information</h5>
+                    <p><strong>Car Problem:</strong> {{ order_line.car_problem }}</p>
+                    <div class="mt-3">
+                        {% if order_line.car.cover %}
+                        <img src="{{ order_line.car.cover.url }}" alt="Car Image" class="img-fluid rounded">
+                        {% else %}
+                        <img src="{% static 'images/no_image.png' %}" alt="No Image" class="img-fluid rounded">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

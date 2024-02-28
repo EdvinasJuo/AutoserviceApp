@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load custom_pagination %}
+
+{% block content %}
+<h1>Cars</h1>
+<p>Autoservice cars</p>
+<p class="lead">CarModel ID: {{car_model.id}}</p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Engine</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{ car_model.make }}</td>
+        <td>{{ car_model.model }}</td>
+        <td>{{ car_model.year }}</td>
+        <td>{{ car_model.engine }}</td>
+    </tr>
+    </tbody>
+</table>
+<!-- pagination šablonas su custom tag'u -->
+{% show_pagination_links car_models %}
+{% endblock %}

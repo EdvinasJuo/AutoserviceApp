@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="info px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Autoservice</h1>
+    <p class="lead">Autoservice app that helps to manage autoservice jobs</p>
+</div>
+<div class="container">
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Services</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title orders">{{ num_services }} <small class="text-muted">/ services</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Oil change</li>
+                    <li>Car diagnostics</li>
+                    <li>Wheel balancing</li>
+                    <li>etc.</li>
+                </ul>
+                <a href="{% url 'services' %}">
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Go to Services</button>
+                </a>
+            </div>
+        </div>
+        {% if user.is_superuser %}
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Orders</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">{{ total_orders }} <small class="text-muted">/
+                    completed</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li class="{% if num_orders_pending %}text-danger{% endif %}">{{num_orders_pending}} Pending</li>
+                    <li class="{% if num_orders_in_progress %}text-primary{% endif %}">{{num_orders_in_progress}} in
+                        Progress
+                    </li>
+                    <li class="{% if num_orders_completed %}text-success{% endif %}">{{num_orders_completed}}
+                        Completed
+                    </li>
+                    <li class="text-info">Watch all Orders</a></li>
+                </ul>
+                <a href="{% url 'order_lines' %}">
+                    <button type="button" class="btn btn-lg btn-block btn-primary">Go to Orders</button>
+                </a>
+            </div>
+        </div>
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Happy clients</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">{{num_customers}} <small class="text-muted">/
+                    customers</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Our</li>
+                    <li>Happy clients</li>
+                    <li>Who visits</li>
+                    <li>Our autoservice</li>
+                </ul>
+                <a href="{% url 'customers' %}">
+                    <button type="button" class="btn btn-lg btn-block btn-primary">Go to Customers</button>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+        {% if user.is_authenticated and not user.is_superuser %}
+        <div class="card mb-4 box-shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0 font-weight-normal">My Orders</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title"><small class="text-muted">You can find your all Orders</small>
+                </h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>By</li>
+                    <li>Pressing</li>
+                    <li>This</li>
+                    <li>Button</li>
+                </ul>
+                <a href="{% url 'my-services' %}">
+                    <button type="button" class="btn btn-lg btn-block btn-primary">Go to My Orders</button>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    {% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load custom_pagination %}
+
+{% block content %}
+<h1>Cars</h1>
+<p>Autoservice cars</p>
+
+<!-- Paieskos forma -->
+  <div class="d-flex justify-content-between">
+        <form method="get" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Vairuotojo paieška" aria-label="Search"
+                   name="q"
+                   value="{{ request.GET.q }}">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
+
+    </div>
+<a href="{% url 'car-model-new' %}?next=/library" class="btn btn-success mt-3">New</a>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Engine</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for c in car_models %}
+    <tr>
+        <td>{{ c.make }}</td>
+        <td>{{ c.model }}</td>
+        <td>{{ c.year }}</td>
+        <td>{{ c.engine }}</td>
+        <td>
+            <a href="{% url 'car_model' car_model_id=c.pk %}" class="btn btn-primary">View Details</a>
+            <a href="{% url 'car-model-update' car_model_id=c.id %}" class="btn btn-warning">Update</a>
+            <a href="{% url 'car-model-delete' car_model_id=c.id %}" class="btn btn-danger">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<!-- pagination šablonas su custom tag'u -->
+{% show_pagination_links car_models %}
+{% endblock %}
