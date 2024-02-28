@@ -62,3 +62,57 @@ Visit http://localhost:8000/admin to log in with your superuser credentials and 
 7. Customers can create and manage their profiles, and when superuser places an order, an user profile is automatically created for them with the default password: Test123.
 
 ## Screenshots
+- <b>Log in</b>
+Shows log in form and if there is a bad log in then an error is displayed
+
+![image](https://github.com/EdvinasJuo/AutoserviceApp/assets/97233138/f3c87847-977f-4793-9d1a-60f6ff2f4ed5)
+
+### Superuser screenshots
+
+Home page:
+![image](https://github.com/EdvinasJuo/AutoserviceApp/assets/97233138/d84f596f-9297-4e3a-9aef-1809c069e3d5)
+
+Order Lines page:
+
+![image](https://github.com/EdvinasJuo/AutoserviceApp/assets/97233138/e0d3311c-2147-4fe2-8523-261077e99a25)
+
+New Order form:
+
+![image](https://github.com/EdvinasJuo/AutoserviceApp/assets/97233138/50d72579-4a5d-49de-9055-91b38fb11b17)
+
+
+Order Details view:
+
+![image](https://github.com/EdvinasJuo/AutoserviceApp/assets/97233138/939f0729-d9ee-4704-ae4b-8a05473af468)
+
+Services page:
+
+![image](https://github.com/EdvinasJuo/AutoserviceApp/assets/97233138/9c703989-1ace-4059-b471-35df87219a8f)
+
+
+Profile page:
+
+![image](https://github.com/EdvinasJuo/AutoserviceApp/assets/97233138/f7a42efc-e823-4e5c-98aa-6693bf8ab33e)
+
+### User screenshots
+
+Main page: 
+
+![image](https://github.com/EdvinasJuo/AutoserviceApp/assets/97233138/2384ec24-fccc-4d35-be54-89181406118c)
+
+My services page:
+
+![image](https://github.com/EdvinasJuo/AutoserviceApp/assets/97233138/e79f5c27-a58f-473e-971e-95d4658fc455)
+
+
+My order details:
+
+![image](https://github.com/EdvinasJuo/AutoserviceApp/assets/97233138/cf67ff93-59c6-4d9c-9eed-4d49e3c17e34)
+
+Services page with prices:
+
+![image](https://github.com/EdvinasJuo/AutoserviceApp/assets/97233138/9d777772-efba-4146-96df-674502abe34a)
+
+
+## Contact
+For any questions or feedback, feel free to contact me: edvinasjuodeika@gmail.com
